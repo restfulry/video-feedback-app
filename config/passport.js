@@ -11,7 +11,18 @@ passport.use(new GoogleStrategy({
 function(accessToken, refreshToken, profile, cb) {
   // console.log(profile);
   User.find({})
-    .then(users => console.log(users))
+    .then(users => console.log('USERS',users))
+    .then(user => {
+      var newUser = new User({
+        name: profile.displayName,
+        email: profile.emails[0].value,
+        googleId: profile.id
+      });
+      newUser.save(function(err) {
+        if (err) return cb(err);
+        return cb(null, newUser);
+      });
+    })
     .catch(err => console.log(err));
 //   User.findOne({ 'googleId': profile.id }, function(err, user) {
 //     console.log('PROFILE', profile);
@@ -20,15 +31,6 @@ function(accessToken, refreshToken, profile, cb) {
 //       return cb(null, user);
 //     } else {
 //       // we have a new student via OAuth!
-//       var newUser = new User({
-//         name: profile.displayName,
-//         email: profile.emails[0].value,
-//         googleId: profile.id
-//       });
-//       newUser.save(function(err) {
-//         if (err) return cb(err);
-//         return cb(null, newUser);
-//       });
 //     }
 //   });
 }
