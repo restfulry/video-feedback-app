@@ -12,7 +12,10 @@ function newVideo(req, res) {
 };
 
 function create(req, res) {
-  const video = new Video(req.body);
+  const vimeoId = req.body.url.split('/')[3];
+  const videoData = {...req.body, vimeoId};
+  const video = new Video(videoData);
+
   video.save()
     .then(() => {
       console.log('VIDEO', video);

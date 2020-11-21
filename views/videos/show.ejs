@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="https://player.vimeo.com/api/player.js"></script>
 </head>
 <body>
   <section id="show-page">
@@ -22,6 +23,11 @@
     <div>URL</div>
     <div><%= video.url %></div>
   </section>
+
+<div id="video-player">
+  <!-- <iframe src="<%= video.url %>"> </iframe> -->
+  <iframe src="https://player.vimeo.com/video/<%= video.vimeoId %>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
 
   <!-- Add Comment -->
   <h3>Comments</h3>

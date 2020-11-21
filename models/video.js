@@ -41,6 +41,9 @@ var videoSchema = new Schema ({
     type: String,
     required: true
   },
+  vimeoId: {
+    type: String,
+  },
   comments: [commentSchema]
 }, {
   timestamps: true
