@@ -18,7 +18,7 @@ function create(req, res) {
 
   video.save()
     .then(() => {
-      console.log('VIDEO', video);
+      console.log('video saved');
       res.redirect('/videos')
     })
     .catch(err => console.log(err));
@@ -32,9 +32,22 @@ function show(req, res) {
     .catch(err => console.log(err));
 };
 
+function edit(req, res) {
+  Video.findById(req.params.id)
+    .then(video => {res.render('videos/edit', {video});
+    })
+    .catch(err => console.log(err));
+};
+
+function update(req, res) {
+
+};
+
 module.exports = {
   index,
   create,
   new: newVideo,
-  show
+  show,
+  edit,
+  update,
 };

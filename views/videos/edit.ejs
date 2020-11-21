@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>EDIT</h1>
+  <section id="show-page">
+    <!-- <h1>Title:</h1>
+    <div><%= video.projectName %></div>
+    <div>Docket</div>
+    <div><%= video.docket %></div>
+    <div>Version</div>
+    <div><%= video.version %></div>
+    <div>Colour Status</div>
+    <div><%= video.colourStatus %></div>
+    <div>Audio Status</div>
+    <div><%= video.audioStatus %></div>
+    <div>Approval Status</div>
+    <div><%= video.approved %></div> -->
+
+
+    <form action="/videos" method="POST">
+      <label>Project Name</label>
+      <input type="text" name="projectName" value="<%= video.projectName %>">
+      <label>Docket</label>
+      <input type="number" name="docket" value="<%= video.docket %>">
+      <label>Version</label>
+      <input type="number" name="version" value="<%= video.version %>">
+      <label>Colour Status</label>
+        <select name="colourStatus">
+          <option value="false">Uncoloured - Proxy</option>
+          <option value="true">Coloured</option>
+        </select>
+      <label>Audio Status</label>
+        <select name="audioStatus">
+          <option value="true">Mixed</option>
+          <option value="false">Unmixed</option>
+        </select>
+      <label>Video URL</label>
+      <input type="text" name="url" value="<%= video.url %>">
+      <input type="submit" value="Update Video">
+    </form>
+
+  </section>
+</body>
+</html>
