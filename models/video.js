@@ -15,7 +15,7 @@ var commentSchema = new Schema ({
 var videoSchema = new Schema ({
   projectName: {
     type: String,
-    // required: true
+    required: true
   },
   docket: {
     type: Number,
