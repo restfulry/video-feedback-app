@@ -13,24 +13,20 @@ function newVideo(req, res) {
 
 function create(req, res) {
   const video = new Video(req.body);
-  video.save(function(err) {
-    if(err) {
-      return console.log(err);
-    };
-    console.log('VIDEO', video);
-    res.redirect(`/videos`);
-  });
+  video.save()
+    .then(() => {
+      console.log('VIDEO', video);
+      res.redirect('/videos')
+    })
+    .catch(err => console.log(err));
 };
 
 function show(req, res) {
-  // Video.findById(req.params.id)
-  // .then((err, video) => {  console.log('Show Video', video);
-  // res.render('videos/show', { title: 'Video', video });
-  //   });
-  Video.findById(req.params.id, function(err, video) {
-    console.log('Show Video', video);
-    res.render('videos/show', { title: 'Video Detail', video});
-  });
+  Video.findById(req.params.id)
+    .then((video) => {  console.log('Show Video', video);
+      res.render('videos/show', { title: 'Video Detail', video });
+    })
+    .catch(err => console.log(err));
 };
 
 module.exports = {
