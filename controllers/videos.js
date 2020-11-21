@@ -26,7 +26,7 @@ function create(req, res) {
 
 function show(req, res) {
   Video.findById(req.params.id)
-    .then((video) => {  console.log('Show Video', video);
+    .then((video) => {
       res.render('videos/show', { title: 'Video Detail', video });
     })
     .catch(err => console.log(err));
@@ -40,7 +40,19 @@ function edit(req, res) {
 };
 
 function update(req, res) {
+  // const vimeoId = req.body.url.split('/')[3];
+  // const videoData = {...req.body, vimeoId};
+  
+  // Video.findById(req.params.id)
+  //   .then(video => video.save())
+  //   .then(() => {
+  //     console.log('video updated');
+  //     res.redirect(`/videos/${video.id}`)
+  //   })
+  //   .catch(err => console.log(err));
 
+  Video.update(req.params.id, req.body);
+  res.redirect(`/videos/${video.id}`);
 };
 
 module.exports = {

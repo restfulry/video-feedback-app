@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
+var methodOverride = require('method-override');
 
 require('dotenv').config();
 
@@ -17,6 +18,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var videosRouter = require('./routes/videos');
 var commentsRouter = require('./routes/comments');
+const { isError } = require('util');
 
 
 // view engine setup
@@ -41,6 +43,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -8,21 +8,7 @@
 <body>
   <h1>EDIT</h1>
   <section id="show-page">
-    <!-- <h1>Title:</h1>
-    <div><%= video.projectName %></div>
-    <div>Docket</div>
-    <div><%= video.docket %></div>
-    <div>Version</div>
-    <div><%= video.version %></div>
-    <div>Colour Status</div>
-    <div><%= video.colourStatus %></div>
-    <div>Audio Status</div>
-    <div><%= video.audioStatus %></div>
-    <div>Approval Status</div>
-    <div><%= video.approved %></div> -->
-
-
-    <form action="/videos" method="POST">
+    <form action="/videos/<%= video._id %>?_method=PUT" method="PUT">
       <label>Project Name</label>
       <input type="text" name="projectName" value="<%= video.projectName %>">
       <label>Docket</label>
@@ -39,11 +25,15 @@
           <option value="true">Mixed</option>
           <option value="false">Unmixed</option>
         </select>
+      <label>Video Approved</label>
+        <select name="videoApproved">
+          <option value="true">Approved</option>
+          <option value="false" selected>In Progress</option>
+        </select>
       <label>Video URL</label>
       <input type="text" name="url" value="<%= video.url %>">
       <input type="submit" value="Update Video">
     </form>
-
   </section>
 </body>
 </html>

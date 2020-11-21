@@ -8,8 +8,8 @@ router.get('/:id', videosCtrl.show);
 
 router.post('/', videosCtrl.create);
 
-router.get('/:id/edit', videosCtrl.edit);
 router.put('/:id', videosCtrl.update);
+router.get('/:id/edit', videosCtrl.edit);
 
 // router.delete('/:id', videosCtrl.delete);
 
