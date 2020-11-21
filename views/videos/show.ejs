@@ -7,7 +7,7 @@
 </head>
 <body>
   <section id="show-page">
-    <div>Title:</div>
+    <h1>Title:</h1>
     <div><%= video.projectName %></div>
     <div>Docket</div>
     <div><%= video.docket %></div>
@@ -22,5 +22,13 @@
     <div>URL</div>
     <div><%= video.url %></div>
   </section>
+
+  <h3>Comments</h3>
+  <form id="add-comment-form" method="POST" action="/videos/<%= video._id %>/comments">
+    <label>Timecode</label>
+    <input type="text" name="timecode">
+    <label>Comment:</label>
+    <textarea name="content"></textarea>
+  </form>
 </body>
 </html>
