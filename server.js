@@ -15,7 +15,7 @@ require('./config/passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var videoRouter = require('./routes/video');
+var videosRouter = require('./routes/videos');
 
 
 // view engine setup
@@ -31,13 +31,19 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/video', videoRouter);
+app.use('/videos', videosRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -15,7 +15,7 @@ var commentSchema = new Schema ({
 var videoSchema = new Schema ({
   projectName: {
     type: String,
-    required: true
+    // required: true
   },
   docket: {
     type: Number,
@@ -25,19 +25,16 @@ var videoSchema = new Schema ({
     type: Number,
     required: true
   },
-  colorStatus: {
+  colourStatus: {
     type: Boolean,
-    required: true,
     default: false,
   },
   audioStatus: {
     type: Boolean,
-    required: true,
     default: false,
   },
   approved: {
     type: Boolean,
-    required: true,
     default: false,
   },
   url: {

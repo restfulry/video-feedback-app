@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>NEW</h1>
+  <form action="/videos" method="POST">
+    <label>Project Name</label>
+    <input type="text" name="projectName">
+    <label>Docket</label>
+    <input type="number" name="docket">
+    <label>Version</label>
+    <input type="number" name="version">
+    <label>Colour Status</label>
+      <select name="colourStatus">
+        <option value="false">Uncoloured - Proxy</option>
+        <option value="true">Coloured</option>
+      </select>
+    <label>Audio Status</label>
+      <select name="audioStatus">
+        <option value="true">Mixed</option>
+        <option value="false">Unmixed</option>
+      </select>
+    <label>Video URL</label>
+    <input type="text" name="url">
+    <!-- Add Project Members -->
+    <input type="submit" value="Add Video">
+  </form>
+</body>
+</html>

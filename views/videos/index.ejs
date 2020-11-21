@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIDEOS</title>
+</head>
+<body>
+  <h1><%= title %></h1>
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Docket</th>
+        <th>Approved</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% videos.forEach(function(video) { %>
+        <tr>
+          <td><%= video.projectName %></td>
+          <td><%= video.docket %></td>
+          <td><%= video.approved %></td>
+          <td><a href="/videos/<%= video._id %>">DETAILS</a></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+</body>
+</html>
