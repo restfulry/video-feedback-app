@@ -58,6 +58,14 @@ function update(req, res) {
   // .then(() => res.redirect(`/videos/${videoId}`));
 };
 
+function deleteVideo(req, res) {
+  Video.findById(req.params.id)
+  .then(video => {
+    video.remove()
+  })
+  .then(() => res.redirect('/videos'))
+};
+
 module.exports = {
   index,
   create,
@@ -65,4 +73,5 @@ module.exports = {
   show,
   edit,
   update,
+  delete: deleteVideo,
 };
