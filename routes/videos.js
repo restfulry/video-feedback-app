@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const videosCtrl = require('../controllers/videos');
+// const video = require('../models/video');
 
 router.get('/', videosCtrl.index);
 router.get('/new', videosCtrl.new);
@@ -11,7 +12,6 @@ router.post('/', videosCtrl.create);
 router.put('/:id', videosCtrl.update);
 router.get('/:id/edit', videosCtrl.edit);
 
-// router.delete('/:id', videosCtrl.delete);
-
+router.delete('/:id', videosCtrl.delete);
 
 module.exports = router;
