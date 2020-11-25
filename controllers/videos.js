@@ -14,7 +14,7 @@ function newVideo(req, res) {
 
 function create(req, res) {
   // const vimeoId = req.body.url.split('/')[3];
-  const idRegex = (?<=\/)[0-9]*;
+  // const idRegex = (?<=\/)[0-9]*;
   const vimeoId = req.body.url.split('/')[3];
   const videoData = {...req.body, vimeoId};
   const video = new Video(videoData);
