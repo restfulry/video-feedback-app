@@ -8,7 +8,9 @@
 <body>
   <h1>EDIT</h1>
   <section id="show-page">
-    <form action="/videos/<%= video._id %>?_method=PUT" method="PUT">
+
+    <form action="/videos/<%= video._id %>?_method=PUT" method="POST">
+
       <label>Project Name</label>
       <input type="text" name="projectName" value="<%= video.projectName %>">
       <label>Docket</label>
@@ -32,7 +34,9 @@
         </select>
       <label>Video URL</label>
       <input type="text" name="url" value="<%= video.url %>">
+
       <input type="submit" value="Update Video">
+
     </form>
   </section>
 </body>

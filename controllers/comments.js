@@ -3,9 +3,9 @@ const Video = require('../models/video');
 function create(req, res) {
   const comment = req.body;
   const videoId = req.params.id;
-  
-  req.body.userId = req.user._id;
-  req.body.userName = req.user.name;
+
+  comment.userId = res.locals.user;
+  req.body.userName = res.locals.name;
 
   console.log("COMMENT", comment);
 

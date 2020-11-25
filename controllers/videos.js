@@ -3,8 +3,9 @@ const { render } = require('../server');
 
 function index(req, res) {
   Video.find({})
-    .then(videos => {console.log(videos);
-      res.render('videos/index', {title: 'All Videos', videos})});
+    .then(videos => {
+      res.render('videos/index', {title: 'All Videos', videos})
+    });
 };
 
 function newVideo(req, res) {
@@ -42,17 +43,19 @@ function edit(req, res) {
 function update(req, res) {
   // const vimeoId = req.body.url.split('/')[3];
   // const videoData = {...req.body, vimeoId};
-  
-  // Video.findById(req.params.id)
-  //   .then(video => video.save())
-  //   .then(() => {
-  //     console.log('video updated');
-  //     res.redirect(`/videos/${video.id}`)
-  //   })
-  //   .catch(err => console.log(err));
+  const videoId = req.params.id;
 
-  Video.update(req.params.id, req.body);
-  res.redirect(`/videos/${video.id}`);
+  Video.findById(req.params.id)
+    .then(video => video.updateOne(req.body))
+    .then(() => {
+      console.log('video updated');
+      res.redirect(`/videos/${videoId}`)
+    })
+    .catch(err => console.log(err));
+
+
+  // Video.update(req.body)
+  // .then(() => res.redirect(`/videos/${videoId}`));
 };
 
 module.exports = {
