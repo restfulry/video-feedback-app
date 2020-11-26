@@ -31,6 +31,10 @@ function create(req, res) {
 
 function show(req, res) {
   let user = res.locals.user;
+  if(user){
+  } else {
+    res.redirect('/videos')
+  };
   let userIdString = JSON.stringify(res.locals.user._id);
   let isVideoCreator;
 

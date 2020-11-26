@@ -29,7 +29,7 @@ function isLoggedIn(req, res, next) {
   if ( req.isAuthenticated() ) {
     res.redirect('/videos');
   } else {
-  res.redirect('/auth/google');
+    res.render('index');
   }
 };
 
