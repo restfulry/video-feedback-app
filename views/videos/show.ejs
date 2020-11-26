@@ -38,7 +38,8 @@
         <tr>
           <th>Timecode</th>
           <th>Comment</th>
-          <th>Date</th>
+          <th></th>
+          <th></th>
           <!-- <th>Reply</th> -->
         </tr>
       </thead>
@@ -48,7 +49,8 @@
           <tr>
             <td><%= comment.timecode %></td>
             <td><%= comment.content %></td>
-            <td><%= comment.createdAt.toLocaleDateString() %> <%= comment.createdAt.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' }) %></td>
+            <td>from <%= comment.user %></td>
+            <td>@ <%= comment.createdAt.toLocaleDateString() %> <%= comment.createdAt.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' }) %></td>
             <!-- <td>
               <form method="POST" action="/videos/<%= video._id %>/comments">
                 <textarea name="content" id="reply-content"></textarea>

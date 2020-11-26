@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 var commentSchema = new Schema ({
   timecode: String,
+  user: String,
   content: {
     type: String,
     required: true
   },
-  user: String,
 }, {
   timestamps: true
 });

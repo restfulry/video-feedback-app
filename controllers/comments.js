@@ -4,14 +4,14 @@ function create(req, res) {
   const comment = req.body;
   const videoId = req.params.id;
 
-  comment.userId = res.locals.user;
-  req.body.userName = res.locals.name;
+  comment.user = res.locals.user.name;
+  // req.body.userName = res.locals.name;
 
   Video.findById(videoId)
     .then(video => {
       video.comments.push(comment);
       video.save();
-      console.log("SAVED VIDEO", video);
+      console.log("SAVED COMMENT", video.comments);
     })
     .then(() => res.redirect(`/videos/${videoId}`))
     .catch(err => console.log(err));

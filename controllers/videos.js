@@ -38,9 +38,14 @@ function show(req, res) {
 };
 
 function edit(req, res) {
+  let userIdString = JSON.stringify(res.locals.user._id);
+  
   Video.findById(req.params.id)
   .then(video => {
-    if(video.creator === res.locals.user._id) {
+    let videoCreator = JSON.stringify(video.creator);
+    console.log("VIDEO CREATOR", (video.creator));
+    console.log("User ID", (JSON.stringify(res.locals.user._id)));
+    if(videoCreator === userIdString) {
       res.render('videos/edit', {title: 'Edit Information', video});
     } else {
       res.redirect('/videos');
