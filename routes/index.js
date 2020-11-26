@@ -3,7 +3,7 @@ var router = express.Router();
 const passport = require('passport');
 
 /* GET home page. */
-router.get('/', function(req, res) {
+router.get('/', isLoggedIn, function(req, res) {
   res.render('index')
 });
 
@@ -24,5 +24,13 @@ router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+
+function isLoggedIn(req, res, next) {
+  if ( req.isAuthenticated() ) {
+    res.redirect('/videos');
+  } else {
+  res.redirect('/auth/google');
+  }
+};
 
 module.exports = router;

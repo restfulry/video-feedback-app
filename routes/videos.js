@@ -5,7 +5,7 @@ const videosCtrl = require('../controllers/videos');
 
 router.get('/',isLoggedIn, videosCtrl.index);
 router.get('/new',isLoggedIn, videosCtrl.new);
-router.get('/:id',isLoggedIn, videosCtrl.show);
+router.get('/:id', videosCtrl.show);
 
 router.post('/', videosCtrl.create);
 

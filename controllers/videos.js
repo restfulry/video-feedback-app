@@ -30,11 +30,25 @@ function create(req, res) {
 };
 
 function show(req, res) {
+  let user = res.locals.user;
+  let userIdString = JSON.stringify(res.locals.user._id);
+  let isVideoCreator;
+
+  function videoCreatorCheck(video) {
+    let videoCreator = JSON.stringify(video.creator);
+    if(videoCreator === userIdString){
+      return isVideoCreator = true;
+    } else {
+      return isVideoCreator = false;
+    }
+  };
+
   Video.findById(req.params.id)
-    .then((video) => {
-      res.render('videos/show', { title: 'Video Detail', video });
-    })
-    .catch(err => console.log(err));
+  .then((video) => {
+    videoCreatorCheck(video);
+    res.render('videos/show', { title: 'Video Detail', video, user, isVideoCreator});
+  })
+  .catch(err => console.log(err));
 };
 
 function edit(req, res) {
@@ -43,12 +57,10 @@ function edit(req, res) {
   Video.findById(req.params.id)
   .then(video => {
     let videoCreator = JSON.stringify(video.creator);
-    console.log("VIDEO CREATOR", (video.creator));
-    console.log("User ID", (JSON.stringify(res.locals.user._id)));
     if(videoCreator === userIdString) {
       res.render('videos/edit', {title: 'Edit Information', video});
     } else {
-      res.redirect('/videos');
+      res.redirect(`/videos/${video.id}`);
     }
   }).catch(err => console.log(err));
 };
