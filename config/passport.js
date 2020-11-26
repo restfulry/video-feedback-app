@@ -12,9 +12,7 @@ function(accessToken, refreshToken, profile, cb) {
 
   User.findOne({ 'googleId': profile.id })
     .then(user => {
-      console.log('PROFILE', profile);
       if(user) {
-        console.log('LOGGED IN USER', user);
         return cb(null, user);
       } else {
         var newUser = new User({
@@ -32,7 +30,6 @@ function(accessToken, refreshToken, profile, cb) {
 ));
 
 passport.serializeUser(function(user, done) {
-  console.log("SERIALIZE", user)
   done(null, user.id);
 });
 

@@ -7,8 +7,6 @@ function create(req, res) {
   comment.userId = res.locals.user;
   req.body.userName = res.locals.name;
 
-  console.log("COMMENT", comment);
-
   Video.findById(videoId)
     .then(video => {
       video.comments.push(comment);

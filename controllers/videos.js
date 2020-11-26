@@ -5,7 +5,6 @@ const { render } = require('../server');
 function index(req, res) {
   Video.find({})
     .then(videos => {
-      console.log('LOCAL', req.user);
       res.render('videos/index', {
         title: 'All Videos', 
         videos,
@@ -25,17 +24,14 @@ function create(req, res) {
   video.creator = res.locals.user._id; 
   video.save()
     .then((video) => {
-      console.log('video saved', video);
       res.redirect('/videos')
     })
     .catch(err => console.log(err));
 };
 
 function show(req, res) {
-  console.log("SHOW REQ.USER",req.user);
   Video.findById(req.params.id)
     .then((video) => {
-      console.log('SHOW PG - Video ID', video.id);
       res.render('videos/show', { title: 'Video Detail', video });
     })
     .catch(err => console.log(err));
@@ -43,9 +39,13 @@ function show(req, res) {
 
 function edit(req, res) {
   Video.findById(req.params.id)
-    .then(video => {res.render('videos/edit', {title: 'Edit Information', video});
-    })
-    .catch(err => console.log(err));
+  .then(video => {
+    if(video.creator === res.locals.user._id) {
+      res.render('videos/edit', {title: 'Edit Information', video});
+    } else {
+      res.redirect('/videos');
+    }
+  }).catch(err => console.log(err));
 };
 
 function update(req, res) {
