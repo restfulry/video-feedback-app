@@ -13,6 +13,9 @@ var commentSchema = new Schema ({
 });
 
 var videoSchema = new Schema ({
+  creator: {
+    type: String,
+  },
   projectName: {
     type: String,
     required: true

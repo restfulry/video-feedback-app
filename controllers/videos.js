@@ -21,7 +21,8 @@ function create(req, res) {
   const vimeoIdParse = req.body.url.split('/')[3];
   // const videoData = {...req.body, vimeoId};
   const video = new Video(req.body);
-  video.vimeoId = vimeoIdParse; 
+  video.vimeoId = vimeoIdParse;
+  video.creator = res.locals.user._id; 
   video.save()
     .then((video) => {
       console.log('video saved', video);

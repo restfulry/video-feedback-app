@@ -3,20 +3,20 @@ const router = express.Router();
 const videosCtrl = require('../controllers/videos');
 // const video = require('../models/video');
 
-router.get('/', videosCtrl.index);
-router.get('/new', videosCtrl.new);
-router.get('/:id', videosCtrl.show);
+router.get('/',isLoggedIn, videosCtrl.index);
+router.get('/new',isLoggedIn, videosCtrl.new);
+router.get('/:id',isLoggedIn, videosCtrl.show);
 
 router.post('/', videosCtrl.create);
 
 router.put('/:id', videosCtrl.update);
-router.get('/:id/edit', videosCtrl.edit);
+router.get('/:id/edit',isLoggedIn, videosCtrl.edit);
 
 router.delete('/:id', videosCtrl.delete);
 
 function isLoggedIn(req, res, next) {
   if ( req.isAuthenticated() ) return next();
   res.redirect('/auth/google');
-}
+};
 
 module.exports = router;
