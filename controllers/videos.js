@@ -1,35 +1,40 @@
 const Video = require('../models/video');
+const User = require('../models/user');
 const { render } = require('../server');
 
 function index(req, res) {
   Video.find({})
     .then(videos => {
-      res.render('videos/index', {title: 'All Videos', videos})
-    });
+      console.log('LOCAL', req.user);
+      res.render('videos/index', {
+        title: 'All Videos', 
+        videos,
+    })
+  });
 };
 
 function newVideo(req, res) {
-  res.render('videos/new');
+  res.render('videos/new', {title: 'New Video'});
 };
 
 function create(req, res) {
-  // const vimeoId = req.body.url.split('/')[3];
-  // const idRegex = (?<=\/)[0-9]*;
-  const vimeoId = req.body.url.split('/')[3];
-  const videoData = {...req.body, vimeoId};
-  const video = new Video(videoData);
-
+  const vimeoIdParse = req.body.url.split('/')[3];
+  // const videoData = {...req.body, vimeoId};
+  const video = new Video(req.body);
+  video.vimeoId = vimeoIdParse; 
   video.save()
-    .then(() => {
-      console.log('video saved');
+    .then((video) => {
+      console.log('video saved', video);
       res.redirect('/videos')
     })
     .catch(err => console.log(err));
 };
 
 function show(req, res) {
+  console.log("SHOW REQ.USER",req.user);
   Video.findById(req.params.id)
     .then((video) => {
+      console.log('SHOW PG - Video ID', video.id);
       res.render('videos/show', { title: 'Video Detail', video });
     })
     .catch(err => console.log(err));
@@ -37,25 +42,22 @@ function show(req, res) {
 
 function edit(req, res) {
   Video.findById(req.params.id)
-    .then(video => {res.render('videos/edit', {video});
+    .then(video => {res.render('videos/edit', {title: 'Edit Information', video});
     })
     .catch(err => console.log(err));
 };
 
 function update(req, res) {
   const videoId = req.params.id;
+  const vimeoIdParse = req.body.url.split('/')[3];
+  req.body.vimeoId = vimeoIdParse;
 
-  Video.findById(req.params.id)
-    .then(video => video.updateOne(req.body))
-    .then(() => {
-      console.log('video updated');
-      res.redirect(`/videos/${videoId}`)
-    })
-    .catch(err => console.log(err));
-
-
-  // Video.update(req.body)
-  // .then(() => res.redirect(`/videos/${videoId}`));
+  Video.findByIdAndUpdate(videoId, req.body)
+  .then((video) => {
+    res.redirect(`/videos/${videoId}`)
+    console.log('video updated', video);
+  })
+  .catch(err => console.log(err));
 };
 
 function deleteVideo(req, res) {

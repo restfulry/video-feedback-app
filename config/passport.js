@@ -10,16 +10,12 @@ passport.use(new GoogleStrategy({
 },
 function(accessToken, refreshToken, profile, cb) {
 
-  User.find({})
-    .then(users => console.log('ALL USERS', users))
-    .catch(err => console.log(err));
-
   User.findOne({ 'googleId': profile.id })
     .then(user => {
-      // console.log('PROFILE', profile);
+      console.log('PROFILE', profile);
       if(user) {
         console.log('LOGGED IN USER', user);
-        return cb(null, newUser);
+        return cb(null, user);
       } else {
         var newUser = new User({
           name: profile.displayName,
@@ -32,34 +28,11 @@ function(accessToken, refreshToken, profile, cb) {
       };
     })
     .catch(err => console.log(err));
-  // User.find({})
-  //   .then(users => console.log('USERS',users))
-  //   .then(user => {
-  //     var newUser = new User({
-  //       name: profile.displayName,
-  //       email: profile.emails[0].value,
-  //       googleId: profile.id
-  //     });
-  //     newUser.save(function(err) {
-  //       if (err) return cb(err);
-  //       return cb(null, newUser);
-  //     });
-  //   })
-  //   .catch(err => console.log(err));
-
-//   User.findOne({ 'googleId': profile.id }, function(err, user) {
-//     console.log('PROFILE', profile);
-//     if (err) return cb(err);
-//     if (user) {
-//       return cb(null, user);
-//     } else {
-//       // we have a new student via OAuth!
-//     }
-//   });
 }
 ));
 
 passport.serializeUser(function(user, done) {
+  console.log("SERIALIZE", user)
   done(null, user.id);
 });
 
