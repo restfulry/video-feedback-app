@@ -2,11 +2,17 @@ var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var commentSchema = new Schema ({
-  timecode: String,
+  timecode: Number,
+  timecodeMinute: Number,
+  timecodeSecond: Number,
   user: String,
   content: {
     type: String,
     required: true
+  },
+  status: {
+    type: String,
+    default: "Incomplete"
   },
 }, {
   timestamps: true

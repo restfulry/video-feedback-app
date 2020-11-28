@@ -1,26 +1,39 @@
 <%- include('../partials/header') %>
-  <h1>NEW</h1>
+  <h1 class="align-center">New Video</h1>
+
   <form action="/videos" method="POST">
-    <label>Project Name</label>
-    <input type="text" name="projectName">
-    <label>Docket</label>
-    <input type="number" name="docket">
-    <label>Version</label>
-    <input type="number" name="version">
-    <label>Colour Status</label>
-      <select name="colourStatus">
+    <div class="form-group">
+      <label for="projectName">Project Name</label>
+      <input type="text" class="form-control" name="projectName" id="projectName" placeholder="Project Name">
+    </div>
+    <div class="form-group">
+      <label for="docket">Docket</label>
+      <input type="number" class="form-control" id="docket" name="docket" placeholder="Docket Number: ####">
+    </div>
+    <div class="form-group">
+      <label for="version">Edit Version</label>
+      <input type="number" class="form-control" id="version" name="version" placeholder="Version">
+    </div>
+    <div class="form-group">
+      <label for="colourStatus">Colour Status</label>
+      <select class="form-control" name="colourStatus" id="colourStatus">
         <option value="false">Uncoloured - Proxy</option>
         <option value="true">Coloured</option>
       </select>
-    <label>Audio Status</label>
-      <select name="audioStatus">
-        <option value="true">Mixed</option>
+    </div>
+    <div class="form-group">
+      <label for="audioStatus">Audio Status</label>
+      <select class="form-control" name="audioStatus" id="audioStatus">
         <option value="false">Unmixed</option>
+        <option value="true">Mixed</option>
       </select>
-    <label>Video URL</label>
-    <input type="text" name="url">
-    <!-- TO DO: Add Project Members -->
-    <input type="submit" value="Add Video">
+    </div>
+    <div class="form-group">
+      <label for="url">Video URL</label>
+      <input type="text" class="form-control" name="url" id="url" placeholder="Please enter full Vimeo URL (e.g. http://vimeo.com/123456789)">
+    </div>
+    <input type="submit" class="btn btn-primary" value="Add Video">
   </form>
+
 </body>
 </html>

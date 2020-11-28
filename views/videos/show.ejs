@@ -1,81 +1,118 @@
 <%- include('../partials/header') %>
-  <section id="show-page">
-    <div>Title:</div>
-    <div><%= video.projectName %></div>
+<h4><%= video.projectName %></h4>
+<div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+</div>
+<ul class="list-group list-group-horizontal">
+  <li class="list-group-item flex-fill">
     <div>Docket</div>
     <div><%= video.docket %></div>
+  </li>
+  <li class="list-group-item flex-fill">
     <div>Version</div>
     <div><%= video.version %></div>
+  </li>
+  <li class="list-group-item flex-fill">
     <div>Colour Status</div>
     <div><%= video.colourStatus %></div>
+  </li>
+  <li class="list-group-item flex-fill">
     <div>Audio Status</div>
     <div><%= video.audioStatus %></div>
+  </li>
+  <li class="list-group-item flex-fill">
     <div>Approval Status</div>
     <div><%= video.approved %></div>
-    <% if (isVideoCreator) { %>
-    <a href="/videos/<%= video._id %>/edit">Edit</a>
-    <% }; %>
-  </section>
+  </li>
+  <li class="list-group-item flex-fill">
+    
+    <a class="btn btn-secondary" data-toggle="collapse" href="#settingsCollapse" role="button" aria-expanded="false" aria-controls="settingsCollapse">
+      Settings
+    </a>
+    <div class="collapse" id="settingsCollapse">
+      <% if (isVideoCreator) { %>
+        <a href="/videos/<%= video._id %>/edit">Update</a>
+      <% }; %>
 
-<div id="video-player">
-  <!-- <iframe src="<%= video.url %>"> </iframe> -->
-  <iframe src="https://player.vimeo.com/video/<%= video.vimeoId %>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <% if (isVideoCreator) { %>
+        <form action="/videos/<%= video._id %>?_method=DELETE" method="POST" class="secondary-content">
+          <button type="submit" class="btn btn-danger">Delete Project</button>
+        </form>
+      <% }; %>
+    </div>
+  </li>
+</ul>
+  
+<div class="media">
+  <div class="align-self-center mr-3 embed-responsive embed-responsive-16by9">
+    <div id="video-player">
+      <!-- <iframe src="<%= video.url %>"> </iframe> -->
+      <iframe embed-responsive-item src="https://player.vimeo.com/video/<%= video.vimeoId %>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </div>
+  </div>  
+  <div class="media-body">
+    <h5 class="mt-5">Comments</h5>
+      <% if (video.comments.length) { %>
+        <table>
+    
+          <thead>
+            <tr>
+              <th>Timecode</th>
+              <th>Comment</th>
+              <th></th>
+              <th></th>
+              <!-- TODO: <th>Status</th> -->
+            </tr>
+          </thead>
+    
+          <tbody>
+            <% video.comments.forEach(function(comment) { %>
+              <tr>
+                <td><form action="/videos/<%= video._id %>">
+                  <a href="#"><%= comment.timecode %></a></td>
+                </form>
+                <td><%= comment.content %></td>
+                <td>from <%= comment.user %></td>
+                <td>@ <%= comment.createdAt.toLocaleDateString() %> <%= comment.createdAt.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' }) %></td>
+              </tr>
+           <% }); %>
+          </tbody>
+        
+        </table>
+        <% } else { %>
+          <p>No Comments</p>
+        <% }; %>
+    </div>
 </div>
 
-  <!-- Add Comment -->
-  <% if (user) { %>
-  <h3>Add Comment</h3>
-  <form id="add-comment-form" method="POST" action="/videos/<%= video._id %>/comments">
-    <label>Timecode (frames)</label>
-    <input type="number" name="timecode">
-    <label>Comment:</label>
-    <textarea name="content"></textarea>
-    <input type="submit" value="Add Comment">
-  </form>
-  <% } else { %>
-    <h5>Must be Logged In to Comment</h5>
-  <% }; %>
-
-  <!-- Comments View -->
-  <% if (video.comments.length) { %>
-    <table>
-
-      <thead>
-        <tr>
-          <th>Timecode</th>
-          <th>Comment</th>
-          <th></th>
-          <th></th>
-          <!-- <th>Reply</th> -->
-        </tr>
-      </thead>
-
-      <tbody>
-        <% video.comments.forEach(function(comment) { %>
-          <tr>
-            <td><%= comment.timecode %></td>
-            <td><%= comment.content %></td>
-            <td>from <%= comment.user %></td>
-            <td>@ <%= comment.createdAt.toLocaleDateString() %> <%= comment.createdAt.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit' }) %></td>
-            <!-- <td>
-              <form method="POST" action="/videos/<%= video._id %>/comments">
-                <textarea name="content" id="reply-content"></textarea>
-                <input type="submit" value="Reply">
-              </form>
-          </td> -->
-          </tr>
-       <% }); %>
-      </tbody>
-    
-    </table>
-    <% } else { %>
-      <h5>No Comments</h5>
-    <% }; %>
-
-    <% if (isVideoCreator) { %>
-      <form action="/videos/<%= video._id %>?_method=DELETE" method="POST" class="secondary-content">
-        <button type="submit" class="btn-small red-text">Delete Project</button>
+  <div class="card-body">
+    <% if (user) { %>
+      <h5 class="card-title">Add Comment</h5>
+      <form id="add-comment-form" method="POST" action="/videos/<%= video._id %>/comments">
+        <label>Timecode (frames)</label>
+        <input type="number" name="timecode">
+        <label>Comment:</label>
+        <textarea name="content"></textarea>
+        <button type="submit" class="btn btn-success" >Add Comment</button>
       </form>
-    <% }; %>
+      <% } else { %>
+        <h5>Must be Logged In to Comment</h5>
+      <% }; %>
+  </div>
+
+<% if (isVideoCreator) { %>
+  <form action="/videos/<%= video._id %>?_method=DELETE" method="POST" class="secondary-content">
+    <button type="submit" class="btn btn-danger">Delete Project</button>
+  </form>
+<% }; %>
 </body>
 </html>

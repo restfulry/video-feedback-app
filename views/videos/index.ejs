@@ -1,23 +1,17 @@
 <%- include('../partials/header') %>
   <h1><%= title %></h1>
-  <table id="list">
-    <thead>
-      <tr>
-        <th>Project Name</th>
-        <th>Docket</th>
-        <th>Approval Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% videos.forEach(function(video) { %>
-        <tr>
-          <td><%= video.projectName %></td>
-          <td><%= video.docket %></td>
-          <td><%= video.approved %></td>
-          <td><a href="/videos/<%= video._id %>">DETAILS</a></td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
+  
+  <div class="list-group">
+    <% videos.forEach(function(video) { %>
+      <a href="/videos/<%= video._id %>" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1"><%= video.projectName %></h5>
+          <small><%= video.approved %></small>
+        </div>
+        <p class="mb-1">Docket: <%= video.docket %></p>
+        <p class="mb-1">Version: <%= video.version %></p>
+      </a>
+    <% }); %>
+  </div>
 </body>
 </html>
