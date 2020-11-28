@@ -15,8 +15,6 @@ function create(req, res) {
   
   Video.findById(videoId)
   .then(video => {
-    console.log('COMMENT', comment);
-
       video.comments.push(comment);
       video.save();
       console.log("SAVED COMMENT");

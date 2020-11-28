@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const videosCtrl = require('../controllers/videos');
-// const video = require('../models/video');
 
 router.get('/',isLoggedIn, videosCtrl.index);
 router.get('/new',isLoggedIn, videosCtrl.new);

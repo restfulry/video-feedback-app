@@ -18,7 +18,6 @@ function newVideo(req, res) {
 
 function create(req, res) {
   const vimeoIdParse = req.body.url.split('/')[3];
-  // const videoData = {...req.body, vimeoId};
   const video = new Video(req.body);
   video.vimeoId = vimeoIdParse;
   video.creator = res.locals.user._id; 
@@ -77,7 +76,7 @@ function update(req, res) {
   Video.findByIdAndUpdate(videoId, req.body)
   .then((video) => {
     res.redirect(`/videos/${videoId}`)
-    console.log('video updated', video);
+    console.log('video updated');
   })
   .catch(err => console.log(err));
 };
