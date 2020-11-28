@@ -11,10 +11,11 @@ A client feedback portal for editors and small production companies.
 ## Technologies Used
 
 - HTML & Bootstrap
-- JS & JQuery
-- Built with Express in node.js
-- Mongo db
-- Launched on Heroku with Atlas
+- Javascript
+- Express
+- MongoDB with Atlas
+- Launched on Heroku
+- Vimeo API
 
 ## Getting Started
 
