@@ -29,6 +29,13 @@
     </select>
   </div>
   <div class="form-group">
+    <label for="approved">Approval Status</label>
+    <select class="form-control" name="approved" id="approved">
+      <option value="false">In Progress</option>
+      <option value="true">Approved</option>
+    </select>
+  </div>
+  <div class="form-group">
     <label for="url">Video URL</label>
     <input type="text" class="form-control" name="url" id="url" value="<%= video.url %>">
   </div>

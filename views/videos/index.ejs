@@ -3,10 +3,14 @@
   
   <div class="list-group">
     <% videos.forEach(function(video) { %>
-      <a href="/videos/<%= video._id %>" class="list-group-item list-group-item-action">
+      <a href="/videos/<%= video._id %>" class="list-group-item list-group-item-action  <% if(video.approved) { %>list-group-item-success<% } %> ">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1"><%= video.projectName %></h5>
-          <small><%= video.approved %></small>
+          <small><% if(video.approved) { %>
+            Approved
+          <% } else { %>
+            In Progress
+          <% } %></small>
         </div>
         <p class="mb-1">Docket: <%= video.docket %></p>
         <p class="mb-1">Version: <%= video.version %></p>
