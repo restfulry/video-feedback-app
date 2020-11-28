@@ -7,6 +7,7 @@ A client feedback portal for editors and small production companies.
 ## App Screenshots
 
 ![video page](screenshots/screen_videoproj.png)
+![add video page](screenshots/screen_newvideo.png)
 
 ## Technologies Used
 
